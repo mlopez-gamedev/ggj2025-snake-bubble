@@ -256,7 +256,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Ready with Modern Control
+  m_text: Use Modern Control
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 27014e5d450741e48bb455a9180b9628, type: 2}
   m_sharedMaterial: {fileID: 4073519443318561003, guid: 27014e5d450741e48bb455a9180b9628, type: 2}
@@ -1082,7 +1082,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Ready with Classic Control
+  m_text: Use Classic Tank Control
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 27014e5d450741e48bb455a9180b9628, type: 2}
   m_sharedMaterial: {fileID: 4073519443318561003, guid: 27014e5d450741e48bb455a9180b9628, type: 2}

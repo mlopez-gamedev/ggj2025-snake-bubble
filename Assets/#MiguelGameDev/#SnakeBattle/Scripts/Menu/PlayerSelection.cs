@@ -30,8 +30,8 @@ namespace MiguelGameDev.SnakeBubble.Menu
         private void Awake()
         {
             // FORCE PLAYER READY
-            //_readyWithClassicControlButton.onClick.AddListener(OnReadyWithClassicControlButtonClicked);
-            //_readyWithModernControlButton.onClick.AddListener(OnReadyWithModernControlButtonClicked);
+            _readyWithClassicControlButton.onClick.AddListener(OnReadyWithClassicControlButtonClicked);
+            _readyWithModernControlButton.onClick.AddListener(OnReadyWithModernControlButtonClicked);
         }
 
         private void Start()
@@ -40,7 +40,7 @@ namespace MiguelGameDev.SnakeBubble.Menu
             {
                 return;
             }
-            _joinedPlayer.EventSystem.SetSelectedGameObject(_readyWithClassicControlButton.gameObject);
+            _joinedPlayer.EventSystem.SetSelectedGameObject(_readyWithModernControlButton.gameObject);
         }
 
         public void Setup(SelectPlayerScreen selectPlayerScreen)
@@ -61,15 +61,14 @@ namespace MiguelGameDev.SnakeBubble.Menu
             _pressActionToJoin.gameObject.SetActive(false);
             _joinedGroup.gameObject.SetActive(true);
 
-            _joinedPlayer.EventSystem.playerRoot = player.gameObject;
+            //_joinedPlayer.EventSystem.playerRoot = player.gameObject;
             if (gameObject.activeInHierarchy)
             {
                 _joinedPlayer.EventSystem.SetSelectedGameObject(_readyWithClassicControlButton.gameObject);
-                EventSystem.current.enabled = false;
             }
             
             // FORCE PLAYER READY
-            PlayerReadyWith(SnakeInputAdapter.EAdapter.Modern);
+            //PlayerReadyWith(SnakeInputAdapter.EAdapter.Modern);
         }   
 
         private void OnReadyWithClassicControlButtonClicked()
