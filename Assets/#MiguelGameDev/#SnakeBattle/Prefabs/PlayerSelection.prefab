@@ -183,6 +183,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _config: {fileID: 11400000, guid: a8f986f888b33df40b51f880e937742e, type: 2}
+  _pressActionToJoin: {fileID: 8219278538329912187}
   _joinedGroup: {fileID: 1440034397802543419}
   _joinedGroupStroke: {fileID: 6413021726212615250}
   _readyGroup: {fileID: 6278719724809583574}

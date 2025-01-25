@@ -42,7 +42,7 @@ namespace MiguelGameDev.SnakeBubble.Snake
         {
             _playerInput = playerInput;
             _onDieCallback = onDieCallback;
-            base.Setup(_playerInput.playerIndex, 0, _config.GetColorByIndex(_playerInput.playerIndex));
+            base.Setup(this, _playerInput.playerIndex, 0, _config.GetColorByIndex(_playerInput.playerIndex));
             
             transform.position = spawnTransform.position;
             transform.rotation = spawnTransform.rotation;
@@ -171,7 +171,7 @@ namespace MiguelGameDev.SnakeBubble.Snake
             _growTranslationOffset += 1f;
         }
 
-        private void Degrow()
+        public void Degrow()
         {
             if (_segments.Count == 0)
             {
@@ -181,6 +181,18 @@ namespace MiguelGameDev.SnakeBubble.Snake
             var lastSegment = LastSegment();
             lastSegment.Explode().Preserve();
             _segments.Remove(lastSegment);
+        }
+
+        public void Cut(int segmentIndex)
+        {
+            var realSegmentIndex = segmentIndex - 1;
+            for (int i = realSegmentIndex; i < _segments.Count; i++)
+            {
+                int delay = (i - realSegmentIndex) * 40;
+                _segments[i].Explode(delay).Preserve();
+            }
+            
+            _segments.RemoveRange(realSegmentIndex, _segments.Count - realSegmentIndex);
         }
         
         private SnakeBody LastSegment()
@@ -219,12 +231,15 @@ namespace MiguelGameDev.SnakeBubble.Snake
         
         public void CollideWithOther(SnakeCollider snakeCollider)
         {
-            Crash().Preserve();
+            if (snakeCollider.Hit())
+            {
+                Degrow();
+            }
         }
         
         public void CollideWithOwnBody(SnakeCollider snakeCollider)
         {
-            Crash().Preserve();
+            snakeCollider.Hit();
         }
 
         private async UniTask Crash()

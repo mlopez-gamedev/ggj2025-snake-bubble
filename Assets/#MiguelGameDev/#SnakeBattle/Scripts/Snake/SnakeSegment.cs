@@ -12,6 +12,7 @@ namespace MiguelGameDev.SnakeBubble.Snake
         [Header("Feedback")]
         [SerializeField] private MMF_Player _explodeFeedback;
         
+        protected SnakeHead _head;
         private int _playerIndex;
         private int _segmentIndex;
                 
@@ -30,17 +31,19 @@ namespace MiguelGameDev.SnakeBubble.Snake
             } 
         }
         
-        protected void Setup(int playerIndex, int segmentIndex, BubbleColor color)
+        public void Setup(SnakeHead head, int playerIndex, int segmentIndex, BubbleColor color)
         {
+            _head = head;
             _playerIndex = playerIndex;
             _segmentIndex = segmentIndex;
             Color = color;
             
-            _collider.Setup(this);
+            _collider.Setup(_head, this);
         }
         
         public async UniTask Explode(int delay = 0)
         {
+            _collider.Stop();
             if (delay > 0)
             {
                 await UniTask.Delay(delay);

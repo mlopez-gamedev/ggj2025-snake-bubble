@@ -10,6 +10,7 @@ namespace MiguelGameDev.SnakeBubble.Items
         [SerializeField] private Item _itemPrefab;
         [SerializeField] private ItemSpawner[] _startItemsPositions;
 
+        private int _playersAmount;
         private Camera _camera;
         private List<Item> _items;
 
@@ -20,8 +21,9 @@ namespace MiguelGameDev.SnakeBubble.Items
 
         public void Init(int playersAmount)
         {
-            _items = new List<Item>(playersAmount);
-            for (int i = 0; i < playersAmount; ++i)
+            _playersAmount = playersAmount;
+            _items = new List<Item>(_playersAmount);
+            for (int i = 0; i < _playersAmount; ++i)
             {
                 SpawnAt(_startItemsPositions[i].Position, _startItemsPositions[i].Color);   
             }
@@ -32,7 +34,7 @@ namespace MiguelGameDev.SnakeBubble.Items
         private IEnumerator SpawnCoroutine()
         {
             yield return new WaitForSeconds(10f);
-            foreach (var item in _items)
+            foreach (var item in _startItemsPositions)
             {
                 Spawn(item.Color);
             }
@@ -56,8 +58,6 @@ namespace MiguelGameDev.SnakeBubble.Items
                     Random.Range(-10, 11));
 
                 var spawnCollider = Physics2D.OverlapCircle(position, 0.99f);
-                
-                Debug.Log($"Position: {position} - Collider: {spawnCollider}");
                 
                 return spawnCollider == null;
             }

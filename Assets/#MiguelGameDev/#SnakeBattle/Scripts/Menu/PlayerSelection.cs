@@ -2,6 +2,7 @@ using System;
 using MiguelGameDev.SnakeBubble.Players;
 using MiguelGameDev.SnakeBubble.Snake;
 using MiguelGameDev.SnakeBubble.Snake.Input;
+using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -11,6 +12,9 @@ namespace MiguelGameDev.SnakeBubble.Menu
     public class PlayerSelection : MonoBehaviour
     {
         [SerializeField] private SnakeConfig _config;
+        
+        [SerializeField] private TMP_Text _pressActionToJoin;
+        
         [SerializeField] private Image _joinedGroup;
         [SerializeField] private Image _joinedGroupStroke;
         
@@ -25,8 +29,9 @@ namespace MiguelGameDev.SnakeBubble.Menu
 
         private void Awake()
         {
-            _readyWithClassicControlButton.onClick.AddListener(OnReadyWithClassicControlButtonClicked);
-            _readyWithModernControlButton.onClick.AddListener(OnReadyWithModernControlButtonClicked);
+            // FORCE PLAYER READY
+            //_readyWithClassicControlButton.onClick.AddListener(OnReadyWithClassicControlButtonClicked);
+            //_readyWithModernControlButton.onClick.AddListener(OnReadyWithModernControlButtonClicked);
         }
 
         private void Start()
@@ -53,13 +58,18 @@ namespace MiguelGameDev.SnakeBubble.Menu
             _readyGroup.color = playerColor.BackgroundColor;
             _readyGroupStroke.color = playerColor.Value;
             
+            _pressActionToJoin.gameObject.SetActive(false);
             _joinedGroup.gameObject.SetActive(true);
 
+            _joinedPlayer.EventSystem.playerRoot = player.gameObject;
             if (gameObject.activeInHierarchy)
             {
                 _joinedPlayer.EventSystem.SetSelectedGameObject(_readyWithClassicControlButton.gameObject);
                 EventSystem.current.enabled = false;
             }
+            
+            // FORCE PLAYER READY
+            PlayerReadyWith(SnakeInputAdapter.EAdapter.Modern);
         }   
 
         private void OnReadyWithClassicControlButtonClicked()
@@ -78,6 +88,8 @@ namespace MiguelGameDev.SnakeBubble.Menu
             _readyWithModernControlButton.interactable = false;
             _joinedPlayer.SetInput(adapter);
             
+            
+            _joinedGroup.gameObject.SetActive(false);
             _readyGroup.gameObject.SetActive(true);
             
             _selectPlayerScreen.PlayerReady();

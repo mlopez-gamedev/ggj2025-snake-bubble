@@ -18,7 +18,8 @@ namespace MiguelGameDev.SnakeBubble.Players
         private List<Player> _players;
         
         public int PlayerAmount => _players.Count;
-        
+        public int MaxPlayers => _playerInputManager.maxPlayerCount;
+
         private void Awake()
         {
             _players = new List<Player>();

@@ -29,7 +29,7 @@ namespace MiguelGameDev.SnakeBubble.Menu
         public void Show()
         {
             _canvasGroup.gameObject.SetActive(true);
-            _playersManager.EnableJoining();
+            _playersJoined = _playersManager.PlayerAmount;
         }
 
         public void PlayerJoin(Player player)
@@ -45,7 +45,7 @@ namespace MiguelGameDev.SnakeBubble.Menu
         public void PlayerReady()
         {
             ++_playersReady;
-            if (_playersReady == _playersJoined && _playersJoined > 1)
+            if (/*_playersReady == _playersJoined && */_playersReady == _playersManager.MaxPlayers)
             {
                 _menuMediator.StartGame();
             }

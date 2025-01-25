@@ -374,6 +374,17 @@
                 },
                 {
                     "name": "",
+                    "id": "fca42862-8aca-4660-8f0d-ce84ae32374a",
+                    "path": "<HID::SZ-MP USB Audio Gamepad>/button2",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Submit",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "365eeaf0-116e-41f0-a9c7-19aa34c5cd05",
                     "path": "*/{Cancel}",
                     "interactions": "",

@@ -5,16 +5,9 @@ namespace MiguelGameDev.SnakeBubble.Snake
 {
     public class SnakeBody : SnakeSegment
     {
-        private SnakeHead _head;
         private int _waypointIndex;
         private float _headTranslationLeft;
         public int WaypointIndex => _waypointIndex;
-        
-        internal void Setup(SnakeHead head, int playerIndex, int segmentIndex, BubbleColor color)
-        {
-            base.Setup(playerIndex, segmentIndex, color);
-            _head = head;
-        }
         
         internal void Init(int waypointIndex, float waitForHeadTranslation)
         {

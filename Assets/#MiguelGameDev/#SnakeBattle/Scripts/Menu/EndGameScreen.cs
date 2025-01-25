@@ -18,7 +18,7 @@ namespace MiguelGameDev.SnakeBubble.Menu
         public void ShowWinner(int winner)
         {
             _playerWinnerText.color = _config.GetColorByIndex(winner).Value;
-            _playerWinnerText.text = "Player {winner} wins!!!";
+            _playerWinnerText.text = $"Player {winner} wins!!!";
             
             _canvasGroup.gameObject.SetActive(true);
             _canvasGroup.DOFade(1f, 0.5f).OnComplete(EnableSubmit);
