@@ -72,8 +72,7 @@ namespace MiguelGameDev.SnakeBubble.Snake
 
         private void CollideWithItem(ItemCollider item)
         {
-            item.Eaten();
-            _head.Grow();
+            _head.CollideWithItem(item);
         }
 
         private void CollideWithWall()

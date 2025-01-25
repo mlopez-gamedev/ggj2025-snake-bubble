@@ -155,7 +155,7 @@ namespace MiguelGameDev.SnakeBubble.Snake
             }
         }
         
-        public void Grow()
+        private void Grow()
         {
             var lastSegment = LastSegment();
             var segment = Instantiate(
@@ -168,6 +168,18 @@ namespace MiguelGameDev.SnakeBubble.Snake
             segment.Init(lastSegment.WaypointIndex, 1f + _growTranslationOffset);
 
             _growTranslationOffset += 1f;
+        }
+
+        private void Degrow()
+        {
+            if (_segments.Count == 0)
+            {
+                Crash().Preserve();
+                return;
+            }
+            var lastSegment = LastSegment();
+            lastSegment.Explode().Preserve();
+            _segments.Remove(lastSegment);
         }
         
         private SnakeBody LastSegment()
@@ -188,23 +200,36 @@ namespace MiguelGameDev.SnakeBubble.Snake
 
         public void CollideWithWall()
         {
-            Crash();
+            Crash().Preserve();
+        }
+        
+        public void CollideWithItem(ItemCollider itemCollider)
+        {
+            itemCollider.Eaten();
+            if (itemCollider.Color == Color)
+            {
+                Grow();    
+            }
+            else
+            {
+                Degrow();
+            }
         }
         
         public void CollideWithOther(SnakeCollider snakeCollider)
         {
-            Crash();
+            Crash().Preserve();
         }
         
         public void CollideWithOwnBody(SnakeCollider snakeCollider)
         {
-            Crash();
+            Crash().Preserve();
         }
 
-        private async void Crash()
+        private async UniTask Crash()
         {
             _speed = 0;
-            await UniTask.Delay(1000);
+            await Explode();
             SceneManager.LoadScene(0);
         }
         
