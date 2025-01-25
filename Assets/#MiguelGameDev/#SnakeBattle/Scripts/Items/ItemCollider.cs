@@ -18,7 +18,7 @@ namespace MiguelGameDev.SnakeBubble.Items
         public void Eaten()
         {
             _collider.enabled = false;
-            _item.Eaten();
+            _item.Eaten().Preserve();
         }
     }
 }

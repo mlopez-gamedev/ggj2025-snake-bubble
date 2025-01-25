@@ -34,9 +34,9 @@ namespace MiguelGameDev.SnakeBubble.Items
         private IEnumerator SpawnCoroutine()
         {
             yield return new WaitForSeconds(10f);
-            foreach (var item in _startItemsPositions)
+            for (int i = 0; i < _playersAmount; ++i)
             {
-                Spawn(item.Color);
+                Spawn(_startItemsPositions[i].Color);   
             }
         }
         

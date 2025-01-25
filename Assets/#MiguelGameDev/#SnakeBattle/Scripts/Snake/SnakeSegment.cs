@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace MiguelGameDev.SnakeBubble.Snake
 {
-    public class SnakeSegment : MonoBehaviour
+    public abstract class SnakeSegment : MonoBehaviour
     {
         [SerializeField] private SnakeCollider _collider;
         [SerializeField] private SpriteRenderer _renderer;
@@ -20,6 +20,7 @@ namespace MiguelGameDev.SnakeBubble.Snake
         
         public int PlayerIndex => _playerIndex;
         public int SegmentIndex => _segmentIndex;
+        public abstract int WaypointIndex { get; }
 
         public BubbleColor Color
         {

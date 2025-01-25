@@ -1,3 +1,4 @@
+using Cysharp.Threading.Tasks;
 using MoreMountains.Feedbacks;
 using UnityEngine;
 
@@ -26,11 +27,9 @@ namespace MiguelGameDev.SnakeBubble.Items
             _color = color;
             _renderer.color = _color.Value;
             _spawnEffect.PlayFeedbacks();
-            
-            
         }
 
-        public async void Eaten()
+        public async UniTask Eaten()
         {
             await _eatenEffect.PlayFeedbacksTask();
             

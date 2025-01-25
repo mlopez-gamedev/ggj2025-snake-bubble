@@ -37,7 +37,9 @@ namespace MiguelGameDev.SnakeBubble.Snake
         private float _growTranslationOffset = 0;
 
         private Action _onDieCallback;
-        
+
+        public override int WaypointIndex => 0;
+
         public void Setup(PlayerInput playerInput, Transform spawnTransform, Action onDieCallback)
         {
             _playerInput = playerInput;
@@ -175,10 +177,10 @@ namespace MiguelGameDev.SnakeBubble.Snake
         {
             if (_segments.Count == 0)
             {
-                Crash().Preserve();
+                Crash() .Preserve();
                 return;
             }
-            var lastSegment = LastSegment();
+            var lastSegment = LastBody();
             lastSegment.Explode().Preserve();
             _segments.Remove(lastSegment);
         }
@@ -195,9 +197,19 @@ namespace MiguelGameDev.SnakeBubble.Snake
             _segments.RemoveRange(realSegmentIndex, _segments.Count - realSegmentIndex);
         }
         
-        private SnakeBody LastSegment()
+        private SnakeBody LastBody()
         {
             return _segments[^1];
+        }
+        
+        private SnakeSegment LastSegment()
+        {
+            if (_segments.Count == 0)
+            {
+                return this;
+            }
+
+            return LastBody();
         }
         
         public Waypoint GetWaypoint(int index)

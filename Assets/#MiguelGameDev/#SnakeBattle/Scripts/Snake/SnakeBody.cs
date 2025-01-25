@@ -1,4 +1,5 @@
 using MiguelGameDev.SnakeBubble.Items;
+using MoreMountains.Feedbacks;
 using UnityEngine;
 
 namespace MiguelGameDev.SnakeBubble.Snake
@@ -7,12 +8,16 @@ namespace MiguelGameDev.SnakeBubble.Snake
     {
         private int _waypointIndex;
         private float _headTranslationLeft;
-        public int WaypointIndex => _waypointIndex;
+        public override int WaypointIndex => _waypointIndex;
+        
+        [SerializeField] private MMF_Player _spawnFeedback;
         
         internal void Init(int waypointIndex, float waitForHeadTranslation)
         {
             _waypointIndex = waypointIndex;
             _headTranslationLeft = waitForHeadTranslation;
+            
+            _spawnFeedback.PlayFeedbacks();
         }
 
         public void UpdatePosition(float translation)
