@@ -188,8 +188,8 @@ GameObject:
   m_Component:
   - component: {fileID: 670902403890140709}
   - component: {fileID: 8485990324208473254}
-  - component: {fileID: 5535657614067109380}
   - component: {fileID: 5713594172299554992}
+  - component: {fileID: 6070967907028985984}
   m_Layer: 6
   m_Name: SnakeHead
   m_TagString: Untagged
@@ -230,21 +230,8 @@ MonoBehaviour:
   _playerInput: {fileID: 5713594172299554992}
   _headCollider: {fileID: 9186151901888509923}
   _config: {fileID: 11400000, guid: a8f986f888b33df40b51f880e937742e, type: 2}
-  _input: {fileID: 5535657614067109380}
+  _input: {fileID: 6070967907028985984}
   bodyPrefab: {fileID: 5436786867587034537, guid: b4189afbfff7efc4d90d857a82dcb07f, type: 3}
---- !u!114 &5535657614067109380
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2228632190681614515}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7d263384ee5344a287c5ca47c2079717, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _playerInput: {fileID: 5713594172299554992}
 --- !u!114 &5713594172299554992
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -348,6 +335,19 @@ MonoBehaviour:
     m_ActionName: UI/TrackedDeviceOrientation
   m_NeverAutoSwitchControlSchemes: 1
   m_DefaultControlScheme: 
-  m_DefaultActionMap: Game/ClassicControls
+  m_DefaultActionMap: Menu
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!114 &6070967907028985984
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2228632190681614515}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3846a569e22f4a66bc1f4e6f9ffaaf39, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  adapter: 1

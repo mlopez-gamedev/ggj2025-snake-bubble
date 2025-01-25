@@ -1,23 +1,25 @@
-using UnityEngine;
+using System;
 using UnityEngine.InputSystem;
 
-namespace MiguelGameDev.SnakeBubble.Snake
+namespace MiguelGameDev.SnakeBubble.Snake.Input
 {
-    public class SnakeInputController : MonoBehaviour
+    public class SnakeClassicInput : SnakeInput
     {
-        [SerializeField] private PlayerInput _playerInput;
+        private PlayerInput _playerInput;
 
         private InputAction _turnLeftAction;
         private InputAction _turnRightAction;
         private bool _moveActionPerformed;
         
-        private void Start()
+        public SnakeClassicInput(PlayerInput playerInput)
         {
+            _playerInput = playerInput;
+            _playerInput.SwitchCurrentActionMap("Game/Classic");
             _turnLeftAction = _playerInput.actions.FindAction("TurnLeft");
             _turnRightAction = _playerInput.actions.FindAction("TurnRight");
         }
 
-        internal int CheckDirection()
+        public int CheckDirection()
         {
             if (!_turnLeftAction.IsPressed() && !_turnRightAction.IsPressed())
             {
@@ -52,16 +54,6 @@ namespace MiguelGameDev.SnakeBubble.Snake
                     _moveActionPerformed = false;
                     return 0;
             }
-        }
-        
-        internal bool CancelDirection()
-        {
-            if (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow))
-            {
-                return true;
-            }
-
-            return false;
         }
     }
 }

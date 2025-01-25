@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Cysharp.Threading.Tasks;
 using MiguelGameDev.SnakeBubble.Items;
+using MiguelGameDev.SnakeBubble.Snake.Input;
 using MoreMountains.Feedbacks;
 using Sirenix.OdinInspector;
 using UnityEngine;
@@ -18,7 +19,7 @@ namespace MiguelGameDev.SnakeBubble.Snake
         [SerializeField] private SnakeHeadCollider _headCollider;
         [Header("Dependencies")]
         [SerializeField] private SnakeConfig _config;
-        [SerializeField] private SnakeInputController _input;
+        [SerializeField] private SnakeInputAdapter _input;
         [SerializeField] private SnakeBody bodyPrefab;
         
         //[Header("Feeling")]
