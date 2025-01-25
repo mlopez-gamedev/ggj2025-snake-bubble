@@ -12,8 +12,14 @@ namespace MiguelGameDev.SnakeBubble.Menu
         [SerializeField] private SnakeConfig _config;
         [SerializeField] private CanvasGroup _canvasGroup;
         [SerializeField] private TMP_Text _playerWinnerText;
+        [SerializeField] private TMP_Text _continueText;
 
         private bool _enableSubmit;
+
+        private void Awake()
+        {
+            _continueText.gameObject.SetActive(false);
+        }
         
         public void ShowWinner(int winner)
         {
@@ -27,6 +33,7 @@ namespace MiguelGameDev.SnakeBubble.Menu
             {
                 await UniTask.Delay(5000);
                 _enableSubmit = true;
+                _continueText.gameObject.SetActive(true);
             }
         }
 
