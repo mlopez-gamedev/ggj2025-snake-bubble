@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Cysharp.Threading.Tasks;
+using MiguelGameDev.SnakeBubble.Items;
 using MoreMountains.Feedbacks;
 using Sirenix.OdinInspector;
 using UnityEngine;
@@ -19,6 +20,7 @@ namespace MiguelGameDev.SnakeBubble.Snake
         [SerializeField] private SnakeConfig _config;
         [SerializeField] private SnakeInputController _input;
         [SerializeField] private SnakeBody bodyPrefab;
+        
         //[Header("Feeling")]
         //[SerializeField] private MMF_Player _crashFeedback;
 
@@ -30,17 +32,21 @@ namespace MiguelGameDev.SnakeBubble.Snake
         [ShowInInspector, HideInEditorMode] private int _desiredTurn = 0;
 
         private float _growTranslationOffset = 0;
-        
-        private async void Start()
+        public async void SetupAndInit(Transform[] playerPositions)
         {
-            Setup();
+            Setup(playerPositions);
             await Task.Delay(1000);
             Init();
         }
-
-        private void Setup()
+        
+        private void Setup(Transform[] playerPositions)
         {
-            base.Setup(_playerInput.playerIndex, 0);
+            
+            base.Setup(_playerInput.playerIndex, 0, _config.GetColorByIndex(_playerInput.playerIndex));
+            
+            var spawnTransform = playerPositions[_playerInput.playerIndex];
+            transform.position = spawnTransform.position;
+            transform.rotation = spawnTransform.rotation;
             
             _headCollider.Setup(this);
             
@@ -51,7 +57,7 @@ namespace MiguelGameDev.SnakeBubble.Snake
                     transform.position - transform.up * i,
                     transform.rotation);
 
-                segment.Setup(this, PlayerIndex, i);
+                segment.Setup(this, PlayerIndex, i, Color);
                 _segments.Add(segment);
             }
         }
@@ -156,7 +162,7 @@ namespace MiguelGameDev.SnakeBubble.Snake
                 lastSegment.transform.position,
                 lastSegment.transform.rotation);
 
-            segment.Setup(this, PlayerIndex, _segments.Count + 1);
+            segment.Setup(this, PlayerIndex, _segments.Count + 1, Color);
             _segments.Add(segment);
             segment.Init(lastSegment.WaypointIndex, 1f + _growTranslationOffset);
 
@@ -200,5 +206,6 @@ namespace MiguelGameDev.SnakeBubble.Snake
             await UniTask.Delay(1000);
             SceneManager.LoadScene(0);
         }
+        
     }
 }

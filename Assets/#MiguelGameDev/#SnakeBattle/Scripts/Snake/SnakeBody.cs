@@ -1,3 +1,4 @@
+using MiguelGameDev.SnakeBubble.Items;
 using UnityEngine;
 
 namespace MiguelGameDev.SnakeBubble.Snake
@@ -9,9 +10,9 @@ namespace MiguelGameDev.SnakeBubble.Snake
         private float _headTranslationLeft;
         public int WaypointIndex => _waypointIndex;
         
-        internal void Setup(SnakeHead head, int playerIndex, int segmentIndex)
+        internal void Setup(SnakeHead head, int playerIndex, int segmentIndex, BubbleColor color)
         {
-            base.Setup(playerIndex, segmentIndex);
+            base.Setup(playerIndex, segmentIndex, color);
             _head = head;
         }
         

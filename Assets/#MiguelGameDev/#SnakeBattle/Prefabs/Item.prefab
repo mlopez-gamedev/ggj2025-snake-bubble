@@ -466,5 +466,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _collider: {fileID: 6054975632093977301}
+  _renderer: {fileID: 1636431380165849074}
   _spawnEffect: {fileID: 7891489437066738446}
   _eatenEffect: {fileID: 7879046145910146105}

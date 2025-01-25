@@ -14,3 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _defaultSpeed: 10
   _startSegments: 2
+  _colors:
+  - {fileID: 11400000, guid: a0d662e84342f7942987e4f7cd7b1d1c, type: 2}
+  - {fileID: 11400000, guid: fb8319d94f9b37a4dbfe4ab90f8d9f72, type: 2}
+  - {fileID: 11400000, guid: f29d8980dbfa47e44873e41fcf98c95a, type: 2}
+  - {fileID: 11400000, guid: 874518addadef32498079c003507f0e8, type: 2}

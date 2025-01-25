@@ -226,6 +226,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _collider: {fileID: 18924068540513980}
+  _renderer: {fileID: 3229999798750954533}
   _playerInput: {fileID: 5713594172299554992}
   _headCollider: {fileID: 9186151901888509923}
   _config: {fileID: 11400000, guid: a8f986f888b33df40b51f880e937742e, type: 2}

@@ -7,7 +7,7 @@ namespace MiguelGameDev.SnakeBubble.Items
     public class ItemsManager : MonoBehaviour
     {
         [SerializeField] private Item _itemPrefab;
-        [SerializeField] private Transform[] _startItemsPositions;
+        [SerializeField] private ItemSpawner[] _startItemsPositions;
 
         private Camera _camera;
         private List<Item> _items;
@@ -22,17 +22,17 @@ namespace MiguelGameDev.SnakeBubble.Items
             _items = new List<Item>();
             foreach (var startItemPosition in _startItemsPositions)
             {
-                SpawnAt(startItemPosition.position);   
+                SpawnAt(startItemPosition.Position, startItemPosition.Color);   
             }
         }
         
-        private void Spawn()
+        private void Spawn(BubbleColor color)
         {
             for (int i = 0; i < 100; i++)
             {
                 if (TryGetPosition(out Vector2 spawnPosition))
                 {
-                    SpawnAt(spawnPosition);
+                    SpawnAt(spawnPosition, color);
                     return;
                 }
             }
@@ -51,18 +51,18 @@ namespace MiguelGameDev.SnakeBubble.Items
             }
         }
 
-        private void SpawnAt(Vector2 position)
+        private void SpawnAt(Vector2 position, BubbleColor color)
         {
             var item = Instantiate(_itemPrefab, position, Quaternion.identity);
             
-            item.Spawn(this);
+            item.Spawn(this, color);
             _items.Add(item);
         }
 
         public void ItemEaten(Item item)
         {
             _items.Remove(item);
-            Spawn();
+            Spawn(item.Color);
         }
     }
 }
