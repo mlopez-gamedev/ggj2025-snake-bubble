@@ -17,12 +17,12 @@ namespace MiguelGameDev.SnakeBubble.Items
             _camera = Camera.main;
         }
 
-        public void Init()
+        public void Init(int playersAmount)
         {
-            _items = new List<Item>();
-            foreach (var startItemPosition in _startItemsPositions)
+            _items = new List<Item>(playersAmount);
+            for (int i = 0; i < playersAmount; ++i)
             {
-                SpawnAt(startItemPosition.Position, startItemPosition.Color);   
+                SpawnAt(_startItemsPositions[i].Position, _startItemsPositions[i].Color);   
             }
         }
         

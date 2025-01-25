@@ -29,7 +29,6 @@ namespace MiguelGameDev.SnakeBubble.Snake
         
         private void OnTriggerEnter2D(Collider2D other)
         {
-            Debug.Log(other.gameObject.name);
             if (other.gameObject.layer == _wallLayer)
             {
                 CollideWithWall();

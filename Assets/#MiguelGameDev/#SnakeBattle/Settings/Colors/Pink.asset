@@ -13,3 +13,4 @@ MonoBehaviour:
   m_Name: Pink
   m_EditorClassIdentifier: 
   _value: {r: 0.9490196, g: 0.23529412, b: 0.6509804, a: 1}
+  _backgroundColor: {r: 0.2, g: 0.049586773, b: 0.13719007, a: 1}

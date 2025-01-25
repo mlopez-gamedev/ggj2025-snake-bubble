@@ -13,3 +13,4 @@ MonoBehaviour:
   m_Name: Cyan
   m_EditorClassIdentifier: 
   _value: {r: 0.007843138, g: 0.99607843, b: 0.89411765, a: 1}
+  _backgroundColor: {r: 0.0015748024, g: 0.2, b: 0.17952755, a: 1}

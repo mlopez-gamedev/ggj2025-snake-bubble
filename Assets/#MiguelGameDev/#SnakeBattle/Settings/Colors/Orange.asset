@@ -13,3 +13,4 @@ MonoBehaviour:
   m_Name: Orange
   m_EditorClassIdentifier: 
   _value: {r: 1, g: 0.58431375, b: 0.20784314, a: 1}
+  _backgroundColor: {r: 0.2, g: 0.116862744, b: 0.041568626, a: 1}

@@ -1,10 +1,9 @@
-using System;
 using DG.Tweening;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace MiguelGameDev.SnakeBubble.Title
+namespace MiguelGameDev.SnakeBubble.Menu
 {
     public class TitleScreen : MonoBehaviour
     {
@@ -13,12 +12,17 @@ namespace MiguelGameDev.SnakeBubble.Title
         [SerializeField] private Button _exitButton;
 
         [SerializeField] private GameManager _game;
+
+        private MenuMediator _menuMediator;
+        public void Setup(MenuMediator menuMediator)
+        {
+            _menuMediator = menuMediator;
+        }
+        
         private void Awake()
         {
-            Cursor.visible = false;
             _startButton.gameObject.SetActive(true);
             _exitButton.gameObject.SetActive(true);
-            _canvasGroup.gameObject.SetActive(true);
             _startButton.onClick.AddListener(OnStartButtonClicked);
             _exitButton.onClick.AddListener(OnExitButtonClicked);
         }
@@ -35,11 +39,11 @@ namespace MiguelGameDev.SnakeBubble.Title
             _canvasGroup.interactable = false;
             
             //TODO: AUDIO
-            _canvasGroup.DOFade(0, 1f).OnComplete(StartGame);
+            _canvasGroup.DOFade(0, 0.1f).OnComplete(ShowSelectPlayer);
 
-            void StartGame()
+            void ShowSelectPlayer()
             {
-                _game.StartGame();
+                _menuMediator.ShowSelectPlayer();
             }
         }
         

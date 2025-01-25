@@ -10,8 +10,6 @@ namespace MiguelGameDev.SnakeBubble.Snake.Input
             Classic,
             Modern
         }
-        
-        [SerializeField] private EAdapter adapter;
 
         private PlayerInput _playerInput;
         private SnakeInput _input;
@@ -23,7 +21,7 @@ namespace MiguelGameDev.SnakeBubble.Snake.Input
         
         public void Init(EAdapter inputAdapter)
         {
-            switch (adapter)
+            switch (inputAdapter)
             {
                 case EAdapter.Classic:
                     _input = new SnakeClassicInput(_playerInput);

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Cysharp.Threading.Tasks;
@@ -34,10 +35,13 @@ namespace MiguelGameDev.SnakeBubble.Snake
         [ShowInInspector, HideInEditorMode] private int _desiredTurn = 0;
 
         private float _growTranslationOffset = 0;
+
+        private Action _onDieCallback;
         
-        public void Setup(PlayerInput playerInput, Transform spawnTransform)
+        public void Setup(PlayerInput playerInput, Transform spawnTransform, Action onDieCallback)
         {
             _playerInput = playerInput;
+            _onDieCallback = onDieCallback;
             base.Setup(_playerInput.playerIndex, 0, _config.GetColorByIndex(_playerInput.playerIndex));
             
             transform.position = spawnTransform.position;
@@ -226,6 +230,8 @@ namespace MiguelGameDev.SnakeBubble.Snake
         private async UniTask Crash()
         {
             _speed = 0;
+            _onDieCallback?.Invoke();
+            
             var tasks = new UniTask[_segments.Count + 1];
             tasks[0] = Explode();
             
@@ -235,8 +241,12 @@ namespace MiguelGameDev.SnakeBubble.Snake
             }
             
             await UniTask.WhenAll(tasks);
-            SceneManager.LoadScene(0);
+            
         }
-        
+
+        public void Stop()
+        {
+            _speed = 0;
+        }
     }
 }
