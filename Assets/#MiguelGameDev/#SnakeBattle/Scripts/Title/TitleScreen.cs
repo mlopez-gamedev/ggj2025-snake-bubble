@@ -1,3 +1,4 @@
+using System;
 using DG.Tweening;
 using UnityEditor;
 using UnityEngine;
@@ -20,6 +21,10 @@ namespace MiguelGameDev.SnakeBubble.Title
             _canvasGroup.gameObject.SetActive(true);
             _startButton.onClick.AddListener(OnStartButtonClicked);
             _exitButton.onClick.AddListener(OnExitButtonClicked);
+        }
+
+        private void Start()
+        {
             _startButton.Select();
         }
 

@@ -15,7 +15,6 @@ namespace MiguelGameDev.SnakeBubble.Snake
     public class SnakeHead : SnakeSegment
     {
         [Header("Components")]
-        [SerializeField] private PlayerInput _playerInput;
         [SerializeField] private SnakeHeadCollider _headCollider;
         [Header("Dependencies")]
         [SerializeField] private SnakeConfig _config;
@@ -25,6 +24,8 @@ namespace MiguelGameDev.SnakeBubble.Snake
         //[Header("Feeling")]
         //[SerializeField] private MMF_Player _crashFeedback;
 
+        private PlayerInput _playerInput;
+        
         [ShowInInspector, HideInEditorMode] private float _speed;
         [ShowInInspector, HideInEditorMode] private readonly List<SnakeBody> _segments = new List<SnakeBody>();
         [ShowInInspector, HideInEditorMode] private readonly List<Waypoint> _waypoints = new List<Waypoint>();
@@ -33,23 +34,17 @@ namespace MiguelGameDev.SnakeBubble.Snake
         [ShowInInspector, HideInEditorMode] private int _desiredTurn = 0;
 
         private float _growTranslationOffset = 0;
-        public async void SetupAndInit(Transform[] playerPositions)
-        {
-            Setup(playerPositions);
-            await Task.Delay(1000);
-            Init();
-        }
         
-        private void Setup(Transform[] playerPositions)
+        public void Setup(PlayerInput playerInput, Transform spawnTransform)
         {
-            
+            _playerInput = playerInput;
             base.Setup(_playerInput.playerIndex, 0, _config.GetColorByIndex(_playerInput.playerIndex));
             
-            var spawnTransform = playerPositions[_playerInput.playerIndex];
             transform.position = spawnTransform.position;
             transform.rotation = spawnTransform.rotation;
             
             _headCollider.Setup(this);
+            _input.Setup(_playerInput);
             
             for (int i = 1; i <= _config.StartSegments; i++)
             {
@@ -63,8 +58,10 @@ namespace MiguelGameDev.SnakeBubble.Snake
             }
         }
         
-        private void Init()
+        public void Init(SnakeInputAdapter.EAdapter inputAdapter)
         {
+            _input.Init(inputAdapter);
+            
             _speed = _config.DefaultSpeed;
             // _waypoints.Add(new Waypoint(transform.position, transform.rotation));
             foreach (var segment in _segments)
@@ -229,7 +226,15 @@ namespace MiguelGameDev.SnakeBubble.Snake
         private async UniTask Crash()
         {
             _speed = 0;
-            await Explode();
+            var tasks = new UniTask[_segments.Count + 1];
+            tasks[0] = Explode();
+            
+            for (int i = 1; i <= _segments.Count; i++)
+            {
+                tasks[i] = _segments[i - 1].Explode(i * 40);
+            }
+            
+            await UniTask.WhenAll(tasks);
             SceneManager.LoadScene(0);
         }
         

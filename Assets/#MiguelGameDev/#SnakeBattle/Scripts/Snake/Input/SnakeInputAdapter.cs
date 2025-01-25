@@ -16,10 +16,13 @@ namespace MiguelGameDev.SnakeBubble.Snake.Input
         private PlayerInput _playerInput;
         private SnakeInput _input;
         
-        private void Awake()
+        public void Setup(PlayerInput playerInput)
         {
-            _playerInput = GetComponent<PlayerInput>();
-            
+            _playerInput = playerInput;
+        }
+        
+        public void Init(EAdapter inputAdapter)
+        {
             switch (adapter)
             {
                 case EAdapter.Classic:
