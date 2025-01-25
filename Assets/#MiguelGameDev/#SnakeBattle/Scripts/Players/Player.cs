@@ -14,7 +14,8 @@ namespace MiguelGameDev.SnakeBubble.Players
 
         private PlayerDependencies _playerDependencies;
         private PlayerInput _playerInput;
-        
+
+        private SnakeHead _playerPrefab;
         private SnakeHead _playerSnake;
         
         public int PlayerIndex => _playerInput.playerIndex;
@@ -24,13 +25,11 @@ namespace MiguelGameDev.SnakeBubble.Players
         public MultiplayerEventSystem EventSystem => _playerDependencies.EventSystem;
         public void Setup(SnakeHead playerPrefab, PlayerDependencies[] playerDependencies)
         {
+            _playerPrefab = playerPrefab;
             _playerInput = GetComponent<PlayerInput>();
             _playerDependencies = playerDependencies[_playerInput.playerIndex];
 
             _playerInput.uiInputModule = _playerDependencies.EventSystem.GetComponent<InputSystemUIInputModule>();
-
-            _playerSnake = Instantiate(playerPrefab);
-            _playerSnake.Setup(_playerInput, _playerDependencies.SpawmTransform, NotifyDie);
         }
 
         private void NotifyDie()
@@ -44,8 +43,10 @@ namespace MiguelGameDev.SnakeBubble.Players
             _inputAdapter = inputAdapter;
         }
 
-        public void StartGame()
+        public void StartGame(Transform spawnTransform)
         {
+            _playerSnake = Instantiate(_playerPrefab);
+            _playerSnake.Setup(_playerInput, spawnTransform, NotifyDie);
             _playerSnake.Init(_inputAdapter);
         }
 

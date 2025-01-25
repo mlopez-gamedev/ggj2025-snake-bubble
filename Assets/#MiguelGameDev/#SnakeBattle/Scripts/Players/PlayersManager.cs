@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using MiguelGameDev.SnakeBubble.Levels;
 using MiguelGameDev.SnakeBubble.Menu;
 using MiguelGameDev.SnakeBubble.Snake;
 using TMPro;
@@ -50,12 +51,12 @@ namespace MiguelGameDev.SnakeBubble.Players
             Debug.Log($"{playerInput} left");
         }
 
-        public Player[] StartGame()
+        public Player[] StartGame(Level currentLevel)
         {
             _playerInputManager.DisableJoining();
             foreach (var player in _players)
             {
-                player.StartGame();
+                player.StartGame(currentLevel.SpawnTransform[player.PlayerIndex]);
             }
             
             return _players.ToArray();

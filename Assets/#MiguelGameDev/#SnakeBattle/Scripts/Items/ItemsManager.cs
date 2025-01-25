@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -23,6 +24,17 @@ namespace MiguelGameDev.SnakeBubble.Items
             for (int i = 0; i < playersAmount; ++i)
             {
                 SpawnAt(_startItemsPositions[i].Position, _startItemsPositions[i].Color);   
+            }
+
+            StartCoroutine(SpawnCoroutine());
+        }
+
+        private IEnumerator SpawnCoroutine()
+        {
+            yield return new WaitForSeconds(10f);
+            foreach (var item in _items)
+            {
+                Spawn(item.Color);
             }
         }
         
