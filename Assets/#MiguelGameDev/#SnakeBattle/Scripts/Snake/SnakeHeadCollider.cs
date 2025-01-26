@@ -37,8 +37,7 @@ namespace MiguelGameDev.SnakeBubble.Snake
             
             if (other.gameObject.layer == _playerLayer)
             {
-                // parece que hay problemas colisionando con uno mismo, así que lo quito
-                //CollideWithPlayer(other.gameObject.GetComponent<SnakeCollider>());
+                CollideWithPlayer(other.gameObject.GetComponent<SnakeCollider>());
                 return;
             }
             
@@ -57,17 +56,18 @@ namespace MiguelGameDev.SnakeBubble.Snake
                 return;
             }
             
-            if (IsCollidingWithNeighbour())
-            {
-                return;
-            }
-            
-            _head.CollideWithOwnBody(collider);
-            
-            bool IsCollidingWithNeighbour()
-            {
-                return Math.Abs(collider.SegmentIndex - SegmentIndex) == 1;
-            }
+            // parece que hay problemas colisionando con uno mismo, así que lo quito
+            // if (IsCollidingWithNeighbour())
+            // {
+            //     return;
+            // }
+            //
+            // _head.CollideWithOwnBody(collider);
+            //
+            // bool IsCollidingWithNeighbour()
+            // {
+            //     return Math.Abs(collider.SegmentIndex - SegmentIndex) == 1;
+            // }
         }
 
         private void CollideWithItem(ItemCollider item)
