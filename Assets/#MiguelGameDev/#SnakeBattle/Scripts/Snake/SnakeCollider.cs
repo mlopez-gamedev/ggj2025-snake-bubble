@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
@@ -57,6 +58,11 @@ namespace MiguelGameDev.SnakeBubble.Snake
             _canCollide = false;
             yield return new WaitForSeconds(0.5f);
             _canCollide = true;
+        }
+
+        private void OnDestroy()
+        {
+            _canCollide = false;
         }
     }
 }

@@ -22,6 +22,7 @@ namespace MiguelGameDev.SnakeBubble.Snake
         [SerializeField] private SnakeInputAdapter _input;
         [SerializeField] private SnakeBody bodyPrefab;
         [SerializeField] private MMF_Player _winnerFeedback;
+        [SerializeField] private MMF_Player _hitFeedback;
         //[Header("Feeling")]
         //[SerializeField] private MMF_Player _crashFeedback;
 
@@ -67,8 +68,12 @@ namespace MiguelGameDev.SnakeBubble.Snake
         public void Init(SnakeInputAdapter.EAdapter inputAdapter)
         {
             _input.Init(inputAdapter);
-            
-            _speed = _config.DefaultSpeed;
+
+            if (_playerInput.playerIndex == 0)
+            {
+                _speed = _config.DefaultSpeed;
+            }
+
             // _waypoints.Add(new Waypoint(transform.position, transform.rotation));
             foreach (var segment in _segments)
             {
@@ -177,7 +182,7 @@ namespace MiguelGameDev.SnakeBubble.Snake
         {
             if (_segments.Count == 0)
             {
-                Crash() .Preserve();
+                Crash().Preserve();
                 return;
             }
             var lastSegment = LastBody();
@@ -246,7 +251,9 @@ namespace MiguelGameDev.SnakeBubble.Snake
             if (snakeCollider.Hit())
             {
                 Degrow();
+                _hitFeedback.PlayFeedbacks();
             }
+            
         }
         
         public void CollideWithOwnBody(SnakeCollider snakeCollider)

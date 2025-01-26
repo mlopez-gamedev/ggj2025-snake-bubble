@@ -347,7 +347,7 @@ MonoBehaviour:
     - rid: 0
       type: {class: MMF_Scale, ns: MoreMountains.Feedbacks, asm: MoreMountains.Tools}
       data:
-        Active: 1
+        Active: 0
         UniqueID: -643047020
         Label: Scale
         OriginalLabel: Scale
@@ -664,7 +664,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7513306636949640345, guid: 2a92a61a34d238946a39a74072645c2d, type: 3}
       propertyPath: FeedbacksList.Array.size
-      value: 7
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 7513306636949640345, guid: 2a92a61a34d238946a39a74072645c2d, type: 3}
       propertyPath: 'FeedbacksList.Array.data[3]'
@@ -748,7 +748,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7513306636949640345, guid: 2a92a61a34d238946a39a74072645c2d, type: 3}
       propertyPath: managedReferences[3383329804810977381].MaxPitch
-      value: 2
+      value: 1.8
       objectReference: {fileID: 0}
     - target: {fileID: 7513306636949640345, guid: 2a92a61a34d238946a39a74072645c2d, type: 3}
       propertyPath: managedReferences[3383329804810977381].MinPitch
@@ -772,11 +772,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7513306636949640345, guid: 2a92a61a34d238946a39a74072645c2d, type: 3}
       propertyPath: managedReferences[3383329804810977381].MaxVolume
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7513306636949640345, guid: 2a92a61a34d238946a39a74072645c2d, type: 3}
       propertyPath: managedReferences[3383329804810977381].MinVolume
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7513306636949640345, guid: 2a92a61a34d238946a39a74072645c2d, type: 3}
       propertyPath: managedReferences[3383329804810977381].PanStereo

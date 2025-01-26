@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d7dc0f1b3f04d498456e3c990959b81, type: 3}
   m_Name: SnakeConfig
   m_EditorClassIdentifier: 
-  _defaultSpeed: 3
+  _defaultSpeed: 8
   _startSegments: 2
   _colors:
   - {fileID: 11400000, guid: a0d662e84342f7942987e4f7cd7b1d1c, type: 2}

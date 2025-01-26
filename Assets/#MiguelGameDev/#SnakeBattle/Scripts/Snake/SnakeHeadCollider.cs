@@ -37,7 +37,8 @@ namespace MiguelGameDev.SnakeBubble.Snake
             
             if (other.gameObject.layer == _playerLayer)
             {
-                CollideWithPlayer(other.gameObject.GetComponent<SnakeCollider>());
+                // parece que hay problemas colisionando con uno mismo, así que lo quito
+                //CollideWithPlayer(other.gameObject.GetComponent<SnakeCollider>());
                 return;
             }
             
