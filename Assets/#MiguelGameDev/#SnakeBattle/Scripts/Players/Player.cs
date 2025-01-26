@@ -1,4 +1,5 @@
 using System;
+using Cysharp.Threading.Tasks;
 using MiguelGameDev.SnakeBubble.Snake;
 using MiguelGameDev.SnakeBubble.Snake.Input;
 using UnityEngine;
@@ -43,16 +44,20 @@ namespace MiguelGameDev.SnakeBubble.Players
             _inputAdapter = inputAdapter;
         }
 
-        public void StartGame(Transform spawnTransform)
+        public void Setup(Transform spawnTransform)
         {
             _playerSnake = Instantiate(_playerPrefab);
             _playerSnake.Setup(_playerInput, spawnTransform, NotifyDie);
+        }
+        
+        public void StartGame()
+        {
             _playerSnake.Init(_inputAdapter);
         }
 
-        public void EndGame()
+        public UniTask Win()
         {
-            _playerSnake.Stop();
+            return _playerSnake.Win();
         }
     }
 }

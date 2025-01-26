@@ -40,7 +40,12 @@ namespace MiguelGameDev.SnakeBubble.Menu
             DOTween.Sequence()
                 .Join(_selectPlayerScreen.Hide(1f))
                 .Join(_background.DOFade(0, 1f))
-                .OnComplete(_gameManager.StartGame);
+                .OnComplete(InitGame);
+
+            void InitGame()
+            {
+                _gameManager.StartGame().Preserve();
+            }
         }
     }
 }

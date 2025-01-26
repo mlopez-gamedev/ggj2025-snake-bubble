@@ -21,7 +21,7 @@ namespace MiguelGameDev.SnakeBubble.Snake
         [SerializeField] private SnakeConfig _config;
         [SerializeField] private SnakeInputAdapter _input;
         [SerializeField] private SnakeBody bodyPrefab;
-        
+        [SerializeField] private MMF_Player _winnerFeedback;
         //[Header("Feeling")]
         //[SerializeField] private MMF_Player _crashFeedback;
 
@@ -271,9 +271,15 @@ namespace MiguelGameDev.SnakeBubble.Snake
             
         }
 
-        public void Stop()
+        private void Stop()
         {
             _speed = 0;
+        }
+
+        public async UniTask Win()
+        {
+            Stop();
+            await _winnerFeedback.PlayFeedbacksTask();
         }
     }
 }

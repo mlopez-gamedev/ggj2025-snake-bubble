@@ -1,6 +1,8 @@
 using Cysharp.Threading.Tasks;
+using Lofelt.NiceVibrations;
 using MiguelGameDev.SnakeBubble.Items;
 using MoreMountains.Feedbacks;
+using MoreMountains.FeedbacksForThirdParty;
 using UnityEngine;
 
 namespace MiguelGameDev.SnakeBubble.Snake
@@ -10,6 +12,7 @@ namespace MiguelGameDev.SnakeBubble.Snake
         [SerializeField] private SnakeCollider _collider;
         [SerializeField] private SpriteRenderer _renderer;
         [Header("Feedback")]
+        [SerializeField] private ParticleSystem _bubbleParticles;
         [SerializeField] private MMF_Player _explodeFeedback;
         
         protected SnakeHead _head;
@@ -28,6 +31,7 @@ namespace MiguelGameDev.SnakeBubble.Snake
             protected set
             {
                 _color = value;
+                _bubbleParticles.startColor = _color.Value;
                 _renderer.color = _color.Value;
             } 
         }
@@ -38,8 +42,20 @@ namespace MiguelGameDev.SnakeBubble.Snake
             _playerIndex = playerIndex;
             _segmentIndex = segmentIndex;
             Color = color;
+
+            SetHapticsGamepad();
             
             _collider.Setup(_head, this);
+        }
+
+        private void SetHapticsGamepad()
+        {
+            var haptics = _explodeFeedback.GetFeedbackOfType<MMF_NVContinuous>();
+            if (haptics == null)
+            {
+                return;
+            }
+            haptics.HapticSettings.GamepadID = _playerIndex;
         }
         
         public async UniTask Explode(int delay = 0)

@@ -4,6 +4,7 @@ using MiguelGameDev.SnakeBubble.Items;
 using MiguelGameDev.SnakeBubble.Levels;
 using MiguelGameDev.SnakeBubble.Menu;
 using MiguelGameDev.SnakeBubble.Players;
+using MoreMountains.Feedbacks;
 using TMPro;
 using UnityEngine;
 
@@ -14,13 +15,17 @@ namespace MiguelGameDev.SnakeBubble
         [SerializeField] private PlayersManager _playersManager;
         [SerializeField] private MenuMediator _menuMediator;
         [SerializeField] private LevelsManager _levelsManager;
+        [SerializeField] private MMF_Player _startGameFeedback;
+        [SerializeField] private MMF_Player _endGameFeedback;
 
         private List<Player> _alivePlayers;
         
-        public void StartGame()
+        public async UniTask StartGame()
         {
             _levelsManager.Init(_playersManager.PlayerAmount);
-            var players = _playersManager.StartGame(_levelsManager.CurrentLevel);
+            _playersManager.Setup(_levelsManager.CurrentLevel);
+            await _startGameFeedback.PlayFeedbacksTask();
+            var players = _playersManager.StartGame();
             _alivePlayers = new List<Player>(players);
             foreach (var player in players)
             {
@@ -40,8 +45,12 @@ namespace MiguelGameDev.SnakeBubble
 
         private async UniTask EndGame(Player winner)
         {
-            winner.EndGame();
-            await UniTask.Delay(1000);
+            var tasks = new UniTask[]
+            {
+                _endGameFeedback.PlayFeedbacksTask().AsUniTask(),
+                winner.Win()
+            };
+            await UniTask.WhenAll(tasks);
             _menuMediator.ShowWinner(winner.PlayerIndex);
         }
     }

@@ -32,6 +32,11 @@ namespace MiguelGameDev.SnakeBubble.Snake
                 return false;
             }
             
+            if (!gameObject.activeInHierarchy)
+            {
+                return false;
+            }
+            
             bool returnDamage = false;
             if (SegmentIndex > 0)
             {

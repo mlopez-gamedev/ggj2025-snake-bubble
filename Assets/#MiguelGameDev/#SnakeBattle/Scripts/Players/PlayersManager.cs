@@ -52,12 +52,20 @@ namespace MiguelGameDev.SnakeBubble.Players
             Debug.Log($"{playerInput} left");
         }
 
-        public Player[] StartGame(Level currentLevel)
+        public void Setup(Level currentLevel)
         {
             _playerInputManager.DisableJoining();
             foreach (var player in _players)
             {
-                player.StartGame(currentLevel.SpawnTransform[player.PlayerIndex]);
+                player.Setup(currentLevel.SpawnTransform[player.PlayerIndex]);
+            }
+        }
+
+        public Player[] StartGame()
+        {
+            foreach (var player in _players)
+            {
+                player.StartGame();
             }
             
             return _players.ToArray();
