@@ -69,10 +69,11 @@ namespace MiguelGameDev.SnakeBubble.Snake
         {
             _input.Init(inputAdapter);
 
-            if (_playerInput.playerIndex == 0)
-            {
-                _speed = _config.DefaultSpeed;
-            }
+            // Test
+            //if (_playerInput.playerIndex == 0)
+            //{
+            _speed = _config.DefaultSpeed;
+            //}
 
             // _waypoints.Add(new Waypoint(transform.position, transform.rotation));
             foreach (var segment in _segments)
