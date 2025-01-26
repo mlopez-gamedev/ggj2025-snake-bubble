@@ -13,6 +13,8 @@ MonoBehaviour:
   m_Name: SnakeConfig
   m_EditorClassIdentifier: 
   _defaultSpeed: 8
+  _speedReductionPerSegment: 0.2
+  _minSpeed: 4
   _startSegments: 2
   _colors:
   - {fileID: 11400000, guid: a0d662e84342f7942987e4f7cd7b1d1c, type: 2}

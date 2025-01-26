@@ -35,6 +35,7 @@ namespace MiguelGameDev.SnakeBubble.Snake
         [ShowInInspector, HideInEditorMode] private Vector3 _desiredTurnPosition;
         [ShowInInspector, HideInEditorMode] private int _desiredTurn = 0;
 
+        private bool _stopped;
         private float _growTranslationOffset = 0;
 
         private Action _onDieCallback;
@@ -72,7 +73,7 @@ namespace MiguelGameDev.SnakeBubble.Snake
             // Test
             //if (_playerInput.playerIndex == 0)
             //{
-            _speed = _config.DefaultSpeed;
+            SetSpeed();
             //}
 
             // _waypoints.Add(new Waypoint(transform.position, transform.rotation));
@@ -84,7 +85,7 @@ namespace MiguelGameDev.SnakeBubble.Snake
         
         private void Update()
         {
-            if (_speed == 0)
+            if (_stopped)
             {
                 return;
             }
@@ -175,7 +176,7 @@ namespace MiguelGameDev.SnakeBubble.Snake
             segment.Setup(this, PlayerIndex, _segments.Count + 1, Color);
             _segments.Add(segment);
             segment.Init(lastSegment.WaypointIndex, 1f + _growTranslationOffset);
-
+            SetSpeed();
             _growTranslationOffset += 1f;
         }
 
@@ -189,6 +190,7 @@ namespace MiguelGameDev.SnakeBubble.Snake
             var lastSegment = LastBody();
             lastSegment.Explode().Preserve();
             _segments.Remove(lastSegment);
+            SetSpeed();
         }
 
         public void Cut(int segmentIndex)
@@ -201,6 +203,7 @@ namespace MiguelGameDev.SnakeBubble.Snake
             }
             
             _segments.RemoveRange(realSegmentIndex, _segments.Count - realSegmentIndex);
+            SetSpeed();
         }
         
         private SnakeBody LastBody()
@@ -264,7 +267,7 @@ namespace MiguelGameDev.SnakeBubble.Snake
 
         private async UniTask Crash()
         {
-            _speed = 0;
+            Stop();
             _onDieCallback?.Invoke();
             
             var tasks = new UniTask[_segments.Count + 1];
@@ -276,11 +279,11 @@ namespace MiguelGameDev.SnakeBubble.Snake
             }
             
             await UniTask.WhenAll(tasks);
-            
         }
 
         private void Stop()
         {
+            _stopped = true;
             _speed = 0;
         }
 
@@ -288,6 +291,16 @@ namespace MiguelGameDev.SnakeBubble.Snake
         {
             Stop();
             await _winnerFeedback.PlayFeedbacksTask();
+        }
+
+        private void SetSpeed()
+        {
+            if (_stopped)
+            {
+                return;
+            }
+            var desiredSpeed = _config.DefaultSpeed - _config.SpeedReductionPerSegment * _segments.Count;
+            _speed = Mathf.Max(_config.MinSpeed, desiredSpeed);
         }
     }
 }

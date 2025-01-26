@@ -7,10 +7,14 @@ namespace MiguelGameDev.SnakeBubble.Snake
     public class SnakeConfig : ScriptableObject
     {
         [SerializeField] private float _defaultSpeed;
+        [SerializeField] private float _speedReductionPerSegment;
+        [SerializeField] private float _minSpeed;
         [SerializeField] private int _startSegments;
         [SerializeField] private BubbleColor[] _colors;
         
         public float DefaultSpeed => _defaultSpeed;
+        public float SpeedReductionPerSegment => _speedReductionPerSegment;
+        public float MinSpeed => _minSpeed;
         public int StartSegments => _startSegments;
         
         public BubbleColor GetColorByIndex(int colorIndex)
