@@ -254,7 +254,7 @@ namespace MiguelGameDev.SnakeBubble.Snake
         {
             if (snakeCollider.Hit())
             {
-                Degrow();
+                //Degrow();
                 _hitFeedback.PlayFeedbacks();
             }
             

@@ -31,7 +31,7 @@ namespace MiguelGameDev.SnakeBubble.Menu
 
             async void EnableSubmit()
             {
-                await UniTask.Delay(5000);
+                await UniTask.Delay(2000);
                 _enableSubmit = true;
                 _continueText.gameObject.SetActive(true);
             }
