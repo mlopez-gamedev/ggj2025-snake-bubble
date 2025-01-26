@@ -9,6 +9,7 @@ namespace MiguelGameDev.SnakeBubble.Snake
         [SerializeField] private float _defaultSpeed;
         [SerializeField] private float _speedReductionPerSegment;
         [SerializeField] private float _minSpeed;
+        [SerializeField] private float _shotCooldown = 1f;
         [SerializeField] private int _startSegments;
         [SerializeField] private BubbleColor[] _colors;
         
@@ -16,6 +17,7 @@ namespace MiguelGameDev.SnakeBubble.Snake
         public float SpeedReductionPerSegment => _speedReductionPerSegment;
         public float MinSpeed => _minSpeed;
         public int StartSegments => _startSegments;
+        public float ShotCooldown => _shotCooldown;
         
         public BubbleColor GetColorByIndex(int colorIndex)
         {

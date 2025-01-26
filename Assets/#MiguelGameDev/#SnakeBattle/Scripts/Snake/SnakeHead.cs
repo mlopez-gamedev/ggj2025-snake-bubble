@@ -302,5 +302,15 @@ namespace MiguelGameDev.SnakeBubble.Snake
             var desiredSpeed = _config.DefaultSpeed - _config.SpeedReductionPerSegment * _segments.Count;
             _speed = Mathf.Max(_config.MinSpeed, desiredSpeed);
         }
+
+        public void Shot()
+        {
+            
+        }
+        
+        public void TryShot()
+        {
+            
+        }
     }
 }

@@ -35,6 +35,10 @@ namespace MiguelGameDev.SnakeBubble.Snake.Input
 
         public int CheckDirection()
         {
+            if (_input == null)
+            {
+                return 0;
+            }
             return _input.CheckDirection();
         }
     }

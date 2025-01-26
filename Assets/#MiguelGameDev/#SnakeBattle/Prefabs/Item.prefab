@@ -86,7 +86,7 @@ SpriteRenderer:
   m_Size: {x: 2, y: 2}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!58 &7703399725083371265
@@ -20804,7 +20804,7 @@ MonoBehaviour:
           ButtonText: Automatic Shaker Setup
         Owner: {fileID: 8927599824498033651}
         DebugActive: 0
-        Sfx: {fileID: 8300000, guid: ccdc1026f90774226b4c0759093380b3, type: 3}
+        Sfx: {fileID: 8300000, guid: 15c3062d90db76748835b99513fb0010, type: 3}
         RandomSfx: []
         TestPlayButton:
           ButtonText: Debug Play Sound

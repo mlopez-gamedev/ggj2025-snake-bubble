@@ -48,11 +48,11 @@ namespace MiguelGameDev.SnakeBubble.Snake
             }
         }
 
-        private void CollideWithPlayer(SnakeCollider collider)
+        private void CollideWithPlayer(SnakeCollider snakeCollider)
         {
-            if (collider.PlayerIndex != PlayerIndex)
+            if (snakeCollider.PlayerIndex != PlayerIndex)
             {
-                _head.CollideWithOther(collider);
+                _head.CollideWithOther(snakeCollider);
                 return;
             }
             
